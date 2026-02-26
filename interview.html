@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interview Tips</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Communication & Interview Tips 🎯</h1>
+
+  <div class="card">
+    <form id="form">
+      <input type="hidden" name="service" value="Interview Tips">
+
+      <label>Company Name</label>
+      <input type="text" name="message" required>
+
+      <label>Interview Date</label>
+      <input type="date" name="date" required>
+
+      <label>Timing</label>
+      <input type="text" name="time" required>
+
+      <button type="submit">Submit & Proceed to Payment</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const scriptURL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
+
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    alert("Submitted! Redirecting to payment...");
+    window.location.href = "payment.html";
+  });
+});
+</script>
+
+</body>
+</html>
